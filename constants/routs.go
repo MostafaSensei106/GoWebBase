@@ -6,6 +6,11 @@ const (
 	HelloRoute = "/hello"
 )
 
+// Frontend static files
+const (
+	StaticFolder = "./static"
+)
+
 // Form Names
 const (
 	UserFormName    = "name"
