@@ -9,6 +9,9 @@ import (
 	"github.com/MostafaSensei106/GoWebBase/logic/handlers"
 )
 
+// Execute starts the server and maps routes to handlers.
+// It sets up the static file server and maps the form and hello routes to their respective handlers.
+// It then starts the server at port 8080.
 func Execute() {
 	// Static files
 	fileServer := http.FileServer(http.Dir(constants.StaticFolder))

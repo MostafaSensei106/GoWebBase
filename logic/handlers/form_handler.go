@@ -8,6 +8,11 @@ import (
 	"github.com/MostafaSensei106/GoWebBase/data/models"
 )
 
+// FormHandler handles the form submission request.
+// It first checks if the form data is valid, by calling r.ParseForm().
+// If the form data is invalid, it returns an error to the client.
+// If the form data is valid, it creates a User model and prints the user's name and address to the client.
+// It assumes that the form data contains the name and address fields.
 func FormHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm() err %v", err)
