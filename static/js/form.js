@@ -1,1 +1,56 @@
-document.addEventListener("DOMContentLoaded", (() => { const e = document.getElementById("user-form"), t = document.getElementById("error-message"), n = document.getElementById("success-message"); if (e) { e.addEventListener("submit", (e => { const s = document.getElementById("name").value.trim(), d = document.getElementById("address").value.trim(); return t.style.display = "none", n.style.display = "none", "" === s || "" === d ? (e.preventDefault(), t.textContent = "Both name and address are required.", t.style.display = "block", void t.scrollIntoView({ behavior: "smooth", block: "nearest" })) : s.length < 2 ? (e.preventDefault(), t.textContent = "Name must be at least 2 characters long.", void (t.style.display = "block")) : d.length < 5 ? (e.preventDefault(), t.textContent = " Address must be at least 5 characters long.", void (t.style.display = "block")) : (n.textContent = "✓ Form is valid and ready to submit!", void (n.style.display = "block")) })); const s = document.getElementById("name"), d = document.getElementById("address"); s.addEventListener("input", (() => { "block" === t.style.display && (t.style.display = "none") })), d.addEventListener("input", (() => { "block" === t.style.display && (t.style.display = "none") })) } }));
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('user-form');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
+
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            const name = document.getElementById('name').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            if (name === '' || address === '') {
+                event.preventDefault();
+                errorMessage.textContent = 'Both name and address are required.';
+                errorMessage.style.display = 'block';
+
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return;
+            }
+
+            if (name.length < 2) {
+                event.preventDefault();
+                errorMessage.textContent = 'Name must be at least 2 characters long.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (address.length < 5) {
+                event.preventDefault();
+                errorMessage.textContent = ' Address must be at least 5 characters long.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            successMessage.textContent = '✓ Form is valid and ready to submit!';
+            successMessage.style.display = 'block';
+        });
+
+        const nameInput = document.getElementById('name');
+        const addressInput = document.getElementById('address');
+
+        nameInput.addEventListener('input', () => {
+            if (errorMessage.style.display === 'block') {
+                errorMessage.style.display = 'none';
+            }
+        });
+
+        addressInput.addEventListener('input', () => {
+            if (errorMessage.style.display === 'block') {
+                errorMessage.style.display = 'none';
+            }
+        });
+    }
+});
