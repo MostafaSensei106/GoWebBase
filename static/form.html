@@ -5,18 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoWebBase - Form</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div>
-        <form method="post" action="/form">
-            <label>name</label>
-            <input name="name" type="text" value="">
-            <label>address</label>
-            <input name="address" type="text" value="">
+    <div class="container">
+        <h2>Submit Information</h2>
+        <form id="user-form" method="post" action="/form">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" value="" required>
+            <label for="address">Address</label>
+            <input id="address" name="address" type="text" value="" required>
             <button type="submit">Submit</button>
         </form>
+        <div id="error-message" class="error-message"></div>
+        <a href="index.html">Go to Home</a>
     </div>
+    <script src="js/form.js" defer></script>
 </body>
 
 </html>

@@ -21,5 +21,4 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, "Name = %s\n", user.Name)
 	fmt.Fprintf(w, "Address = %s\n", user.Address)
-
 }

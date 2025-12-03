@@ -6,4 +6,7 @@ const (
 
 	// Name is the name of the application
 	AppName = "GoWebBase"
+
+	//Devaloper is the developer of the application
+	Developer = "MostafaSensei106"
 )
