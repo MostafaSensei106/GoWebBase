@@ -15,7 +15,7 @@ OUTPUT_DIR := bin/$(GOOS)/$(GOARCH)
 OUTPUT := $(OUTPUT_DIR)/$(APP_NAME)
 GOWEBBASE_VERSION := 1.0.0
 
-.PHONY: all build clean release help check deps fmt vet install
+.PHONY: all build clean release help check deps fmt vet install docker-build docker-run
 
 all: build
 
@@ -96,6 +96,16 @@ release: check
 		echo "NOTE: Ensure 'zip' and 'tar' utilities are available in your system's PATH for archiving. On Windows, Git Bash or WSL is recommended."; \
 	}
 
+docker-build:
+	@echo "🐳 Building Docker image..."
+	@docker build -t $(APP_NAME):latest .
+	@echo "✅ Docker image '$(APP_NAME):latest' built successfully."
+
+docker-run: docker-build
+	@echo "🚀 Running Docker container..."
+	@echo "Access the application at http://localhost:8080/static/"
+	@docker run -p 8080:8080 $(APP_NAME):latest
+
 clean:
 	 @echo "🧹 Cleaning build artifacts..."
 	 @rm -rf bin release
@@ -106,14 +116,16 @@ help:
 	 @echo ""
 	 @echo "📖 GoWebBase Makefile Commands"
 	 @echo "============================="
-	 @echo "make all      👉 Alias for 'make build'."
-	 @echo "make deps     👉 Check and download Go module dependencies."
-	 @echo "make fmt      👉 Format all Go source files."
-	 @echo "make vet      👉 Run 'go vet' to check for suspicious constructs."
-	 @echo "make check    👉 Run all checks (deps, fmt, vet)."
-	 @echo "make build    👉 Build the 'gowebbase' executable for the current OS/architecture."
-	 @echo "make install  👉 An alias for 'make build'. Does not install system-wide."
-	 @echo "make release  👉 Build and package for all target platforms (Linux, Windows)."
-	 @echo "make clean    👉 Delete all build artifacts, release archives, and Go caches."
-	 @echo "make help     👉 Show this help message."
+	 @echo "make all           👉 Alias for 'make build'."
+	 @echo "make deps          👉 Check and download Go module dependencies."
+	 @echo "make fmt           👉 Format all Go source files."
+	 @echo "make vet           👉 Run 'go vet' to check for suspicious constructs."
+	 @echo "make check         👉 Run all checks (deps, fmt, vet)."
+	 @echo "make build         👉 Build the 'gowebbase' executable for the current OS/architecture."
+	 @echo "make install       👉 An alias for 'make build'. Does not install system-wide."
+	 @echo "make release       👉 Build and package for all target platforms (Linux, Windows)."
+	 @echo "make docker-build  👉 Build the Docker image for the application."
+	 @echo "make docker-run    👉 Build and run the application inside a Docker container."
+	 @echo "make clean         👉 Delete all build artifacts, release archives, and Go caches."
+	 @echo "make help          👉 Show this help message."
 	 @echo ""
